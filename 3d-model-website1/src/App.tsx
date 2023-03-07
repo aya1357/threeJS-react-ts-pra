@@ -23,9 +23,9 @@ function App() {
       75,
       sizes.width / sizes.height,
       0.1,
-      1000
+      2000
     );
-    camera.position.set(-1, -0.2, 2);
+    camera.position.set(-1.2, 0.2, 2.1);
 
     //renderer
     const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer({
@@ -44,18 +44,25 @@ function App() {
     //3dモデルのインポート
     const gltfLoader = new GLTFLoader();
 
-    gltfLoader.load("./models/cat.gltf", (gltf) => {
+    gltfLoader.load("./models/yumelog2.glb", (gltf) => {
       model = gltf.scene;
       scene.add(model);
-      model.scale.set(0.5, 0.5, 0.5);
-      model.rotation.y = -Math.PI / 4;
+      model.scale.set(0.23, 0.23, 0.23);
+      model.rotation.x = Math.PI / 7;
+      model.rotation.y = -Math.PI / 4.1;
+      model.rotation.z = Math.PI / 90;
     })
 
     //ライト
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
     scene.add(ambientLight);
-    const pointLight = new THREE.PointLight(0xffffff, 2, 100);
+    const pointLight = new THREE.PointLight(0xd1ffff, 1, 100);
     scene.add(pointLight);
+    const light = new THREE.DirectionalLight(0xffffff);
+    light.intensity = 1; // 光の強さ
+    light.position.set(-20, 40, 1);
+    // シーンに追加
+    scene.add(light);
 
     //アニメーション
     const tick = () => {
